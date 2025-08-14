@@ -96,7 +96,6 @@ class EmbeddingService:
         return processed
 
     def process_embeddings_large_batch(self, texts: List[str], is_query: bool = False) -> List[List[float]]:
-        """Process embeddings with optimized large batches"""
         if not texts or not self.model_loaded:
             return []
 

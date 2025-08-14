@@ -2,6 +2,9 @@
 Main application entry point for the enhanced Python embedding service
 """
 import concurrent.futures
+import json
+
+import numpy as np
 from flask import Flask, request, jsonify
 from typing import List
 
@@ -20,6 +23,23 @@ app = Flask(__name__)
 
 # Global thread pool
 thread_pool = None
+
+
+# Hàm chuyển đổi JSON tùy chỉnh
+class NpEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.integer):
+            return int(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super(NpEncoder, self).default(obj)
+
+
+# Initialize Flask app
+app = Flask(__name__)
+app.json_encoder = NpEncoder  # Cấu hình Flask sử dụng NpEncoder
 
 
 def init_thread_pool():
