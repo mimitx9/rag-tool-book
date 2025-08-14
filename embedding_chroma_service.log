@@ -6977,3 +6977,377 @@ Available factories: attribute_ruler, tok2vec, merge_noun_chunks, merge_entities
 2025-08-14 16:28:52,353 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/add "HTTP/1.1 201 Created"
 2025-08-14 16:28:52,383 - INFO - SUCCESS: Stored 903 documents in ChromaDB
 2025-08-14 16:28:52,425 - INFO - 127.0.0.1 - - [14/Aug/2025 16:28:52] "POST /chroma/articles/process HTTP/1.1" 200 -
+2025-08-14 16:32:49,788 - INFO - HYBRID QUERY: 'Blunt and penetrating trauma' (n_results=10)
+2025-08-14 16:32:50,223 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:32:50,225 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:32:50,225 - ERROR - ERROR: Failed to perform hybrid query: 'NoneType' object is not iterable
+2025-08-14 16:32:50,225 - INFO - 127.0.0.1 - - [14/Aug/2025 16:32:50] "[35m[1mPOST /chroma/collection/hybrid-query HTTP/1.1[0m" 500 -
+2025-08-14 16:34:55,550 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:34:55,986 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:34:55,990 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:34:55,991 - ERROR - ERROR: Failed to perform hybrid query: 'NoneType' object is not iterable
+2025-08-14 16:34:55,991 - INFO - 127.0.0.1 - - [14/Aug/2025 16:34:55] "[35m[1mPOST /chroma/collection/hybrid-query HTTP/1.1[0m" 500 -
+2025-08-14 16:37:13,986 - INFO - Service shutdown complete
+2025-08-14 16:37:14,555 - INFO - Service shutdown complete
+2025-08-14 16:37:27,030 - INFO - ============================================================
+2025-08-14 16:37:27,030 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 16:37:27,030 - INFO - ============================================================
+2025-08-14 16:37:27,030 - INFO - ============================================================
+2025-08-14 16:37:27,030 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 16:37:27,030 - INFO - ============================================================
+2025-08-14 16:37:27,030 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 16:37:27,030 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 16:37:27,030 - INFO - GPU/MPS Available: True
+2025-08-14 16:37:27,030 - INFO - Optimized batch size: 32
+2025-08-14 16:37:31,366 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 16:37:31,433 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 16:37:31,434 - INFO - SUCCESS: Models loaded and warmed up in 4.40 seconds
+2025-08-14 16:37:32,010 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 16:37:32,427 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 16:37:32,618 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 16:37:32,832 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:37:32,841 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:37:32,841 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 16:37:32,842 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 16:37:32,842 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 16:37:32,842 - INFO -  ARTICLE PROCESSING:
+2025-08-14 16:37:32,842 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 16:37:32,842 - INFO -  EMBEDDING:
+2025-08-14 16:37:32,842 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 16:37:32,842 - INFO -  CHROMADB:
+2025-08-14 16:37:32,843 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 16:37:32,843 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 16:37:32,843 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 16:37:32,843 - INFO -  SYSTEM:
+2025-08-14 16:37:32,843 - INFO -  - GET /health - Health check with stats
+2025-08-14 16:37:32,843 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 16:37:32,843 - INFO - ============================================================
+2025-08-14 16:37:32,843 - INFO - ENHANCED FEATURES:
+2025-08-14 16:37:32,843 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 16:37:32,843 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 16:37:32,843 - INFO -  - UMLS integration for medical concepts
+2025-08-14 16:37:32,843 - INFO -  - Table processing with T5
+2025-08-14 16:37:32,843 - INFO -  - Concurrent article processing
+2025-08-14 16:37:32,844 - INFO -  - Max concurrent downloads: 10
+2025-08-14 16:37:32,844 - INFO -  - Download timeout: 30s
+2025-08-14 16:37:32,844 - INFO -  - Connection pooling enabled
+2025-08-14 16:37:32,844 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 16:37:32,844 - INFO -  - Streaming processing for large batches
+2025-08-14 16:37:32,844 - INFO - ============================================================
+2025-08-14 16:37:32,844 - INFO - Starting Flask server on localhost:5001
+2025-08-14 16:37:32,919 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://localhost:5001
+2025-08-14 16:37:32,920 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-14 16:37:32,921 - INFO -  * Restarting with stat
+2025-08-14 16:37:43,729 - INFO - ============================================================
+2025-08-14 16:37:43,729 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 16:37:43,729 - INFO - ============================================================
+2025-08-14 16:37:43,729 - INFO - ============================================================
+2025-08-14 16:37:43,729 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 16:37:43,729 - INFO - ============================================================
+2025-08-14 16:37:43,729 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 16:37:43,729 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 16:37:43,729 - INFO - GPU/MPS Available: True
+2025-08-14 16:37:43,729 - INFO - Optimized batch size: 32
+2025-08-14 16:37:47,670 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 16:37:47,735 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 16:37:47,736 - INFO - SUCCESS: Models loaded and warmed up in 4.01 seconds
+2025-08-14 16:37:48,314 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 16:37:48,680 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 16:37:48,842 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 16:37:49,009 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:37:49,016 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:37:49,016 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 16:37:49,016 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 16:37:49,016 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 16:37:49,016 - INFO -  ARTICLE PROCESSING:
+2025-08-14 16:37:49,016 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 16:37:49,016 - INFO -  EMBEDDING:
+2025-08-14 16:37:49,016 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 16:37:49,016 - INFO -  CHROMADB:
+2025-08-14 16:37:49,016 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 16:37:49,016 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 16:37:49,016 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 16:37:49,016 - INFO -  SYSTEM:
+2025-08-14 16:37:49,016 - INFO -  - GET /health - Health check with stats
+2025-08-14 16:37:49,017 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 16:37:49,017 - INFO - ============================================================
+2025-08-14 16:37:49,017 - INFO - ENHANCED FEATURES:
+2025-08-14 16:37:49,017 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 16:37:49,017 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 16:37:49,017 - INFO -  - UMLS integration for medical concepts
+2025-08-14 16:37:49,017 - INFO -  - Table processing with T5
+2025-08-14 16:37:49,017 - INFO -  - Concurrent article processing
+2025-08-14 16:37:49,017 - INFO -  - Max concurrent downloads: 10
+2025-08-14 16:37:49,017 - INFO -  - Download timeout: 30s
+2025-08-14 16:37:49,017 - INFO -  - Connection pooling enabled
+2025-08-14 16:37:49,017 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 16:37:49,017 - INFO -  - Streaming processing for large batches
+2025-08-14 16:37:49,017 - INFO - ============================================================
+2025-08-14 16:37:49,017 - INFO - Starting Flask server on localhost:5001
+2025-08-14 16:37:49,080 - WARNING -  * Debugger is active!
+2025-08-14 16:37:49,129 - INFO -  * Debugger PIN: 110-738-442
+2025-08-14 16:37:49,197 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:37:49,333 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:37:49,339 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:37:49,339 - ERROR - ERROR: Failed to perform hybrid query: 'NoneType' object is not iterable
+2025-08-14 16:37:49,340 - INFO - 127.0.0.1 - - [14/Aug/2025 16:37:49] "[35m[1mPOST /chroma/collection/hybrid-query HTTP/1.1[0m" 500 -
+2025-08-14 16:38:23,047 - INFO - Service shutdown complete
+2025-08-14 16:38:23,624 - INFO - Service shutdown complete
+2025-08-14 16:38:40,806 - INFO - ============================================================
+2025-08-14 16:38:40,806 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 16:38:40,807 - INFO - ============================================================
+2025-08-14 16:38:40,807 - INFO - ============================================================
+2025-08-14 16:38:40,807 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 16:38:40,807 - INFO - ============================================================
+2025-08-14 16:38:40,807 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 16:38:40,807 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 16:38:40,807 - INFO - GPU/MPS Available: True
+2025-08-14 16:38:40,807 - INFO - Optimized batch size: 32
+2025-08-14 16:38:44,484 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 16:38:44,546 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 16:38:44,550 - INFO - SUCCESS: Models loaded and warmed up in 3.74 seconds
+2025-08-14 16:38:45,149 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 16:38:45,570 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 16:38:45,728 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 16:38:45,890 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:38:45,894 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:38:45,895 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 16:38:45,895 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 16:38:45,895 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 16:38:45,896 - INFO -  ARTICLE PROCESSING:
+2025-08-14 16:38:45,896 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 16:38:45,896 - INFO -  EMBEDDING:
+2025-08-14 16:38:45,896 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 16:38:45,897 - INFO -  CHROMADB:
+2025-08-14 16:38:45,897 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 16:38:45,897 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 16:38:45,897 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 16:38:45,898 - INFO -  SYSTEM:
+2025-08-14 16:38:45,898 - INFO -  - GET /health - Health check with stats
+2025-08-14 16:38:45,899 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 16:38:45,899 - INFO - ============================================================
+2025-08-14 16:38:45,899 - INFO - ENHANCED FEATURES:
+2025-08-14 16:38:45,900 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 16:38:45,900 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 16:38:45,900 - INFO -  - UMLS integration for medical concepts
+2025-08-14 16:38:45,901 - INFO -  - Table processing with T5
+2025-08-14 16:38:45,901 - INFO -  - Concurrent article processing
+2025-08-14 16:38:45,901 - INFO -  - Max concurrent downloads: 10
+2025-08-14 16:38:45,901 - INFO -  - Download timeout: 30s
+2025-08-14 16:38:45,902 - INFO -  - Connection pooling enabled
+2025-08-14 16:38:45,902 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 16:38:45,902 - INFO -  - Streaming processing for large batches
+2025-08-14 16:38:45,903 - INFO - ============================================================
+2025-08-14 16:38:45,903 - INFO - Starting Flask server on localhost:5001
+2025-08-14 16:38:45,960 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://localhost:5001
+2025-08-14 16:38:45,960 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-14 16:38:45,962 - INFO -  * Restarting with stat
+2025-08-14 16:39:01,260 - INFO - ============================================================
+2025-08-14 16:39:01,260 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 16:39:01,260 - INFO - ============================================================
+2025-08-14 16:39:01,260 - INFO - ============================================================
+2025-08-14 16:39:01,261 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 16:39:01,261 - INFO - ============================================================
+2025-08-14 16:39:01,261 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 16:39:01,261 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 16:39:01,261 - INFO - GPU/MPS Available: True
+2025-08-14 16:39:01,261 - INFO - Optimized batch size: 32
+2025-08-14 16:39:05,066 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 16:39:05,129 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 16:39:05,132 - INFO - SUCCESS: Models loaded and warmed up in 3.87 seconds
+2025-08-14 16:39:05,797 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 16:39:06,217 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 16:39:06,389 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 16:39:06,577 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:39:06,585 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:39:06,585 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 16:39:06,586 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 16:39:06,587 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 16:39:06,587 - INFO -  ARTICLE PROCESSING:
+2025-08-14 16:39:06,588 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 16:39:06,588 - INFO -  EMBEDDING:
+2025-08-14 16:39:06,588 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 16:39:06,589 - INFO -  CHROMADB:
+2025-08-14 16:39:06,589 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 16:39:06,589 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 16:39:06,590 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 16:39:06,590 - INFO -  SYSTEM:
+2025-08-14 16:39:06,590 - INFO -  - GET /health - Health check with stats
+2025-08-14 16:39:06,591 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 16:39:06,591 - INFO - ============================================================
+2025-08-14 16:39:06,592 - INFO - ENHANCED FEATURES:
+2025-08-14 16:39:06,592 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 16:39:06,592 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 16:39:06,593 - INFO -  - UMLS integration for medical concepts
+2025-08-14 16:39:06,593 - INFO -  - Table processing with T5
+2025-08-14 16:39:06,593 - INFO -  - Concurrent article processing
+2025-08-14 16:39:06,593 - INFO -  - Max concurrent downloads: 10
+2025-08-14 16:39:06,593 - INFO -  - Download timeout: 30s
+2025-08-14 16:39:06,594 - INFO -  - Connection pooling enabled
+2025-08-14 16:39:06,594 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 16:39:06,594 - INFO -  - Streaming processing for large batches
+2025-08-14 16:39:06,594 - INFO - ============================================================
+2025-08-14 16:39:06,595 - INFO - Starting Flask server on localhost:5001
+2025-08-14 16:39:06,681 - WARNING -  * Debugger is active!
+2025-08-14 16:39:06,715 - INFO -  * Debugger PIN: 110-738-442
+2025-08-14 16:40:17,836 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:40:25,315 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:40:25,322 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:40:54,909 - ERROR - ERROR: Failed to perform hybrid query: 'NoneType' object is not iterable
+2025-08-14 16:41:03,350 - INFO - 127.0.0.1 - - [14/Aug/2025 16:41:03] "[35m[1mPOST /chroma/collection/hybrid-query HTTP/1.1[0m" 500 -
+2025-08-14 16:41:13,526 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:41:15,280 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:41:15,282 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:41:15,283 - ERROR - ERROR: Failed to perform hybrid query: 'NoneType' object is not iterable
+2025-08-14 16:41:15,284 - INFO - 127.0.0.1 - - [14/Aug/2025 16:41:15] "[35m[1mPOST /chroma/collection/hybrid-query HTTP/1.1[0m" 500 -
+2025-08-14 16:41:38,698 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:41:39,833 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:41:39,838 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:41:49,049 - ERROR - ERROR: Failed to perform hybrid query: 'NoneType' object is not iterable
+2025-08-14 16:41:49,051 - INFO - 127.0.0.1 - - [14/Aug/2025 16:41:49] "[35m[1mPOST /chroma/collection/hybrid-query HTTP/1.1[0m" 500 -
+2025-08-14 16:41:53,924 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:42:11,959 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:42:11,962 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:43:49,245 - INFO -  * Detected change in '/Users/duc/PycharmProjects/pythonProject/chromadb_service.py', reloading
+2025-08-14 16:43:49,847 - INFO - Service shutdown complete
+2025-08-14 16:43:51,318 - INFO - Service shutdown complete
+2025-08-14 16:45:50,446 - INFO - ============================================================
+2025-08-14 16:45:50,446 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 16:45:50,446 - INFO - ============================================================
+2025-08-14 16:45:50,447 - INFO - ============================================================
+2025-08-14 16:45:50,447 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 16:45:50,447 - INFO - ============================================================
+2025-08-14 16:45:50,447 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 16:45:50,447 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 16:45:50,447 - INFO - GPU/MPS Available: True
+2025-08-14 16:45:50,447 - INFO - Optimized batch size: 32
+2025-08-14 16:45:55,756 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 16:45:55,822 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 16:45:55,823 - INFO - SUCCESS: Models loaded and warmed up in 5.38 seconds
+2025-08-14 16:45:56,469 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 16:45:57,907 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 16:45:58,079 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 16:45:58,253 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:45:58,262 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:45:58,262 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 16:45:58,262 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 16:45:58,262 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 16:45:58,262 - INFO -  ARTICLE PROCESSING:
+2025-08-14 16:45:58,262 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 16:45:58,262 - INFO -  EMBEDDING:
+2025-08-14 16:45:58,262 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 16:45:58,262 - INFO -  CHROMADB:
+2025-08-14 16:45:58,262 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 16:45:58,262 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 16:45:58,262 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 16:45:58,262 - INFO -  SYSTEM:
+2025-08-14 16:45:58,262 - INFO -  - GET /health - Health check with stats
+2025-08-14 16:45:58,262 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 16:45:58,263 - INFO - ============================================================
+2025-08-14 16:45:58,263 - INFO - ENHANCED FEATURES:
+2025-08-14 16:45:58,263 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 16:45:58,263 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 16:45:58,263 - INFO -  - UMLS integration for medical concepts
+2025-08-14 16:45:58,263 - INFO -  - Table processing with T5
+2025-08-14 16:45:58,263 - INFO -  - Concurrent article processing
+2025-08-14 16:45:58,263 - INFO -  - Max concurrent downloads: 10
+2025-08-14 16:45:58,263 - INFO -  - Download timeout: 30s
+2025-08-14 16:45:58,263 - INFO -  - Connection pooling enabled
+2025-08-14 16:45:58,263 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 16:45:58,263 - INFO -  - Streaming processing for large batches
+2025-08-14 16:45:58,263 - INFO - ============================================================
+2025-08-14 16:45:58,263 - INFO - Starting Flask server on localhost:5001
+2025-08-14 16:45:58,323 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://localhost:5001
+2025-08-14 16:45:58,324 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-14 16:45:58,325 - INFO -  * Restarting with stat
+2025-08-14 16:46:09,149 - INFO - ============================================================
+2025-08-14 16:46:09,149 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 16:46:09,149 - INFO - ============================================================
+2025-08-14 16:46:09,149 - INFO - ============================================================
+2025-08-14 16:46:09,149 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 16:46:09,149 - INFO - ============================================================
+2025-08-14 16:46:09,149 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 16:46:09,149 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 16:46:09,149 - INFO - GPU/MPS Available: True
+2025-08-14 16:46:09,149 - INFO - Optimized batch size: 32
+2025-08-14 16:46:13,226 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 16:46:13,290 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 16:46:13,291 - INFO - SUCCESS: Models loaded and warmed up in 4.14 seconds
+2025-08-14 16:46:13,797 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 16:46:14,256 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 16:46:14,421 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 16:46:14,658 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:46:14,662 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:46:14,663 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 16:46:14,663 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 16:46:14,663 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 16:46:14,663 - INFO -  ARTICLE PROCESSING:
+2025-08-14 16:46:14,663 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 16:46:14,663 - INFO -  EMBEDDING:
+2025-08-14 16:46:14,664 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 16:46:14,664 - INFO -  CHROMADB:
+2025-08-14 16:46:14,664 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 16:46:14,664 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 16:46:14,664 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 16:46:14,664 - INFO -  SYSTEM:
+2025-08-14 16:46:14,664 - INFO -  - GET /health - Health check with stats
+2025-08-14 16:46:14,664 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 16:46:14,664 - INFO - ============================================================
+2025-08-14 16:46:14,664 - INFO - ENHANCED FEATURES:
+2025-08-14 16:46:14,664 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 16:46:14,664 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 16:46:14,664 - INFO -  - UMLS integration for medical concepts
+2025-08-14 16:46:14,664 - INFO -  - Table processing with T5
+2025-08-14 16:46:14,664 - INFO -  - Concurrent article processing
+2025-08-14 16:46:14,664 - INFO -  - Max concurrent downloads: 10
+2025-08-14 16:46:14,664 - INFO -  - Download timeout: 30s
+2025-08-14 16:46:14,664 - INFO -  - Connection pooling enabled
+2025-08-14 16:46:14,664 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 16:46:14,665 - INFO -  - Streaming processing for large batches
+2025-08-14 16:46:14,665 - INFO - ============================================================
+2025-08-14 16:46:14,665 - INFO - Starting Flask server on localhost:5001
+2025-08-14 16:46:14,727 - WARNING -  * Debugger is active!
+2025-08-14 16:46:14,769 - INFO -  * Debugger PIN: 110-738-442
+2025-08-14 16:46:14,831 - INFO - HYBRID QUERY: 'Textbook of Gastrointestinal Radiology' (n_results=10)
+2025-08-14 16:46:15,037 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:46:15,038 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:46:16,075 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:46:16,441 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:46:17,240 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:46:17,875 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:46:18,408 - INFO - HYBRID SEARCH DETAILS for 'Textbook of Gastrointestinal Radiology':
+2025-08-14 16:46:18,408 - INFO -   Title results: 0
+2025-08-14 16:46:18,408 - INFO -   Content semantic: 30
+2025-08-14 16:46:18,408 - INFO -   Content fulltext: 30
+2025-08-14 16:46:18,408 - INFO -   Outline results: 20
+2025-08-14 16:46:18,408 - INFO -   Combined unique results: 50
+2025-08-14 16:46:18,408 - INFO -   Final results after reranking: 20
+2025-08-14 16:46:18,408 - INFO - SUCCESS: Hybrid search completed in 3.577s
+2025-08-14 16:46:18,408 - INFO -   Found 10 results
+2025-08-14 16:46:18,408 - INFO -   Field distribution: {'content': 10}
+2025-08-14 16:46:18,408 - INFO -   Search type distribution: {'semantic': 10, 'fulltext': 10}
+2025-08-14 16:46:18,408 - INFO -   Medical entities: 193 total, 10 results with entities
+2025-08-14 16:46:18,409 - INFO - 127.0.0.1 - - [14/Aug/2025 16:46:18] "POST /chroma/collection/hybrid-query HTTP/1.1" 200 -
+2025-08-14 16:47:05,841 - INFO - HYBRID QUERY: 'gastroenterology, and surgery' (n_results=10)
+2025-08-14 16:47:06,398 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 16:47:06,404 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 16:47:06,865 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:47:07,177 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:47:07,862 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:47:08,290 - INFO - HTTP Request: POST https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/a3109e3d-7a7f-4694-aa42-9a1671b0efdf/query "HTTP/1.1 200 OK"
+2025-08-14 16:47:08,672 - INFO - HYBRID SEARCH DETAILS for 'gastroenterology, and surgery':
+2025-08-14 16:47:08,673 - INFO -   Title results: 0
+2025-08-14 16:47:08,673 - INFO -   Content semantic: 30
+2025-08-14 16:47:08,673 - INFO -   Content fulltext: 30
+2025-08-14 16:47:08,673 - INFO -   Outline results: 20
+2025-08-14 16:47:08,673 - INFO -   Combined unique results: 50
+2025-08-14 16:47:08,673 - INFO -   Final results after reranking: 20
+2025-08-14 16:47:08,673 - INFO - SUCCESS: Hybrid search completed in 2.831s
+2025-08-14 16:47:08,673 - INFO -   Found 10 results
+2025-08-14 16:47:08,673 - INFO -   Field distribution: {'content': 10}
+2025-08-14 16:47:08,673 - INFO -   Search type distribution: {'semantic': 10, 'fulltext': 10}
+2025-08-14 16:47:08,673 - INFO -   Medical entities: 332 total, 10 results with entities
+2025-08-14 16:47:08,674 - INFO - 127.0.0.1 - - [14/Aug/2025 16:47:08] "POST /chroma/collection/hybrid-query HTTP/1.1" 200 -

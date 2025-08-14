@@ -132,60 +132,30 @@ class ChromaDBService:
             logger.error(f"ERROR: Failed to query collection: {str(e)}")
             return []
 
+    # ADD ONLY ONE new method - simple hybrid search
     def hybrid_search(self, query: str, n_results: int = 10) -> List[Dict[str, Any]]:
+        """
+        Simple hybrid search: one query searches across title/content/outline with weighted ranking
+
+        Logic:
+        1. Search in title chunks (semantic only, high weight)
+        2. Search in content chunks (semantic + full-text combined, medium weight)
+        3. Search in outline chunks (semantic only, low weight)
+        4. Boost results with medical entities
+        5. Combine and rerank
+        """
         try:
             self.collection = self._get_or_create_collection()
+
+            # Search weights
             title_weight = 0.5  # Highest priority
             content_weight = 0.4  # Medium priority
             outline_weight = 0.1  # Lowest priority
             medical_boost = 0.2  # Bonus for medical entities
-        except Exception as e:
-            logger.error(f"ERROR: Failed to query collection: {str(e)}")
-            return []
 
-    def _simulate_fulltext_search(self, query: str, field_type: str, n_results: int) -> List[Dict[str, Any]]:
-        """
-        Simulate full-text search using embedding service
-        Since we can't use ChromaDB's query_texts (dimension mismatch),
-        we'll use embeddings but with different query preprocessing for more literal matching
-        """
-        try:
-            self.collection = self._get_or_create_collection()
-
-            # For full-text effect, we can:
-            # 1. Use exact query as-is (more literal)
-            # 2. Maybe enhance with keyword extraction later
-
-            # Create embedding for literal query
-            literal_embedding = embedding_service.generate_embeddings([f"exact: {query}"], is_query=True)[0]
-
-            results = self.collection.query(
-                query_embeddings=[literal_embedding],
-                n_results=n_results,
-                include=["documents", "metadatas", "distances"],
-                where={"field_type": field_type}
-            )
-
-            # Post-process to boost exact keyword matches
-            formatted_results = self._format_results(results, f"fulltext_{field_type}")
-
-            # Boost results that contain exact query words
-            query_words = set(query.lower().split())
-            for result in formatted_results:
-                text_words = set(result['text'].lower().split())
-                word_overlap = len(query_words.intersection(text_words)) / len(query_words)
-
-                # Adjust distance based on word overlap (lower distance = better match)
-                original_distance = result['distance']
-                boosted_distance = original_distance * (1 - word_overlap * 0.3)  # Up to 30% boost
-                result['distance'] = max(0.1, boosted_distance)  # Don't go below 0.1
-                result['word_overlap_score'] = word_overlap
-
-            return formatted_results
-
-        except Exception as e:
-            logger.error(f"ERROR: Simulated full-text search failed: {str(e)}")
-            return []
+            # For content: combine semantic and full-text
+            semantic_weight = 0.7  # Semantic search weight within content
+            fulltext_weight = 0.3  # Full-text search weight within content
 
             query_embedding = embedding_service.generate_embeddings([query], is_query=True)[0]
 
@@ -206,38 +176,19 @@ class ChromaDBService:
                 where={"field_type": "content"}
             )
 
-            # For content: combine semantic and full-text
-            semantic_weight = 0.7  # Semantic search weight within content
-            fulltext_weight = 0.3  # Full-text search weight within content
+            # 2b. Full-text search in content - FIX: Use embeddings instead of query_texts
+            # ChromaDB's query_texts will trigger auto-embedding, causing dimension mismatch
+            # Instead, we'll do a separate embedding-based search with text preprocessing
 
-            query_embedding = embedding_service.generate_embeddings([query], is_query=True)[0]
+            # For full-text effect, we can preprocess query to be more literal
+            fulltext_query = query  # Could enhance this with keyword extraction
+            fulltext_embedding = embedding_service.generate_embeddings([fulltext_query], is_query=True)[0]
 
-            # 1. Search in title chunks (semantic only)
-            title_results = self.collection.query(
-                query_embeddings=[query_embedding],
-                n_results=n_results * 2,
-                include=["documents", "metadatas", "distances"],
-                where={"field_type": "title"}
-            )
-
-            # 2. Search in content chunks - HYBRID: semantic + full-text-like
-            # 2a. Semantic search in content
-            content_semantic_results = self.collection.query(
-                query_embeddings=[query_embedding],
-                n_results=n_results * 3,  # Get more for combining
+            content_fulltext_results = self.collection.query(
+                query_embeddings=[fulltext_embedding],  # Use our embedding service
+                n_results=n_results * 3,
                 include=["documents", "metadatas", "distances"],
                 where={"field_type": "content"}
-            )
-
-            # 2b. Full-text-like search in content using our embedding service
-            content_fulltext_results = self._simulate_fulltext_search(query, "content", n_results * 3)
-
-            # 3. Search in outline chunks (semantic only)
-            outline_results = self.collection.query(
-                query_embeddings=[query_embedding],
-                n_results=n_results * 2,
-                include=["documents", "metadatas", "distances"],
-                where={"field_type": "outline"}
             )
 
             # 3. Search in outline chunks (semantic only)
@@ -422,10 +373,6 @@ class ChromaDBService:
 
                 return final_results[:n_results]
 
-            return []
-
-        except Exception as e:
-            logger.error(f"ERROR: Hybrid search failed: {str(e)}")
             return []
 
         except Exception as e:
