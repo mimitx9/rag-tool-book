@@ -1,0 +1,50 @@
+2025-08-14 17:20:55,960 - INFO - ============================================================
+2025-08-14 17:20:55,961 - INFO - STARTING ENHANCED EMBEDDING + CHROMA SERVICE
+2025-08-14 17:20:55,961 - INFO - ============================================================
+2025-08-14 17:20:55,961 - INFO - ============================================================
+2025-08-14 17:20:55,961 - INFO - STARTING EMBEDDING SERVICE
+2025-08-14 17:20:55,961 - INFO - ============================================================
+2025-08-14 17:20:55,961 - INFO - Loading article model: ncbi/MedCPT-Article-Encoder
+2025-08-14 17:20:55,961 - INFO - Loading query model: ncbi/MedCPT-Query-Encoder
+2025-08-14 17:20:55,961 - INFO - GPU/MPS Available: True
+2025-08-14 17:20:55,961 - INFO - Optimized batch size: 32
+2025-08-14 17:20:59,025 - INFO - SUCCESS: Models moved to MPS
+2025-08-14 17:20:59,088 - INFO - OPTIMIZATION: Using half precision (FP16)
+2025-08-14 17:20:59,089 - INFO - SUCCESS: Models loaded and warmed up in 3.13 seconds
+2025-08-14 17:20:59,697 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/auth/identity "HTTP/1.1 200 OK"
+2025-08-14 17:21:00,130 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant "HTTP/1.1 200 OK"
+2025-08-14 17:21:00,299 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database "HTTP/1.1 200 OK"
+2025-08-14 17:21:00,483 - INFO - HTTP Request: GET https://chromadb.ap.ngrok.io/api/v2/tenants/default_tenant/databases/default_database/collections/clinicalkey "HTTP/1.1 200 OK"
+2025-08-14 17:21:00,489 - INFO - SUCCESS: Retrieved existing collection clinicalkey
+2025-08-14 17:21:00,489 - INFO - SUCCESS: ChromaDB client initialized with collection clinicalkey
+2025-08-14 17:21:00,489 - INFO - SUCCESS: Thread pool initialized with 8 workers
+2025-08-14 17:21:00,490 - INFO - ENHANCED ENDPOINTS: Available endpoints:
+2025-08-14 17:21:00,490 - INFO -  ARTICLE PROCESSING:
+2025-08-14 17:21:00,490 - INFO -  - POST /chroma/articles/process - Process articles (download HTML + embed + store)
+2025-08-14 17:21:00,490 - INFO -  EMBEDDING:
+2025-08-14 17:21:00,490 - INFO -  - POST /embed - Generate embeddings (legacy)
+2025-08-14 17:21:00,490 - INFO -  CHROMADB:
+2025-08-14 17:21:00,491 - INFO -  - POST /chroma/collection/query - Query collection (semantic only)
+2025-08-14 17:21:00,491 - INFO -  - POST /chroma/collection/hybrid-query - Hybrid query (title + content + outline)
+2025-08-14 17:21:00,491 - INFO -  - GET /chroma/collections - List all collections
+2025-08-14 17:21:00,491 - INFO -  SYSTEM:
+2025-08-14 17:21:00,491 - INFO -  - GET /health - Health check with stats
+2025-08-14 17:21:00,491 - INFO -  - GET /stats - Detailed processing statistics
+2025-08-14 17:21:00,492 - INFO - ============================================================
+2025-08-14 17:21:00,492 - INFO - ENHANCED FEATURES:
+2025-08-14 17:21:00,492 - INFO -  - HTML download & parsing with BeautifulSoup
+2025-08-14 17:21:00,492 - INFO -  - Intelligent text chunking with overlap
+2025-08-14 17:21:00,492 - INFO -  - UMLS integration for medical concepts
+2025-08-14 17:21:00,492 - INFO -  - Table processing with T5
+2025-08-14 17:21:00,493 - INFO -  - Concurrent article processing
+2025-08-14 17:21:00,493 - INFO -  - Max concurrent downloads: 10
+2025-08-14 17:21:00,493 - INFO -  - Download timeout: 30s
+2025-08-14 17:21:00,493 - INFO -  - Connection pooling enabled
+2025-08-14 17:21:00,493 - INFO -  - GPU/MPS optimization (if available)
+2025-08-14 17:21:00,493 - INFO -  - Streaming processing for large batches
+2025-08-14 17:21:00,494 - INFO - ============================================================
+2025-08-14 17:21:00,494 - INFO - Starting Flask server on localhost:5001
+2025-08-14 17:21:00,562 - WARNING -  * Debugger is active!
+2025-08-14 17:21:00,592 - INFO -  * Debugger PIN: 110-738-442
+2025-08-14 17:24:18,517 - INFO -  * Detected change in '/Users/duc/PycharmProjects/pythonProject/chromadb_service.py', reloading
+2025-08-14 17:24:19,057 - INFO - Service shutdown complete

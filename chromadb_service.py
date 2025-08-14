@@ -337,22 +337,22 @@ class ChromaDBService:
                 pairs = [(query, item[1]['result']['text']) for item in top_candidates]
                 cross_scores = self.cross_encoder.predict(pairs)
 
-                # Combine weighted score with cross-encoder score
                 final_results = []
                 for i, (doc_id, score_data) in enumerate(top_candidates):
                     result = score_data['result'].copy()
-                    result['hybrid_score'] = score_data['weighted_score']
-                    result['cross_encoder_score'] = float(cross_scores[i])
-                    result['final_score'] = score_data['weighted_score'] * 0.7 + cross_scores[i] * 0.3
-                    result['field_matches'] = list(set(score_data['field_matches']))  # Remove duplicates
-                    result['search_types'] = list(set(score_data['search_types']))  # Remove duplicates
-                    result['distance'] = score_data['best_distance']
+                    result['hybrid_score'] = float(score_data['weighted_score'])  # Chuyển thành float
+                    result['cross_encoder_score'] = float(cross_scores[i])  # Đã có float, nhưng đảm bảo
+                    result['final_score'] = float(
+                        score_data['weighted_score'] * 0.7 + cross_scores[i] * 0.3)  # Chuyển thành float
+                    result['field_matches'] = list(set(score_data['field_matches']))
+                    result['search_types'] = list(set(score_data['search_types']))
+                    result['distance'] = float(score_data['best_distance'])  # Chuyển thành float
 
-                    # Add detailed score breakdown for debugging
+                    # Chuyển đổi score_breakdown
                     result['score_breakdown'] = {
-                        'hybrid_score': score_data['weighted_score'],
+                        'hybrid_score': float(score_data['weighted_score']),
                         'cross_encoder_score': float(cross_scores[i]),
-                        'final_score': result['final_score'],
+                        'final_score': float(result['final_score']),
                         'field_matches': result['field_matches'],
                         'search_types': result['search_types']
                     }
